@@ -74,7 +74,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent className="p-6">
                    <p className="mb-4 flex items-center">
-                    <Zap className="mr-2"/> <span className="font-semibold">Hybrid/Electric:</span> {car.hybridOrElectric}
+                    <Zap className="mr-2 text-yellow-500"/> <span className="font-semibold">Hybrid/Electric:</span> {car.hybridOrElectric}
                   </p>
                   <h3 className="text-lg font-semibold mb-2">Trims:</h3>
                   <ul className="list-disc list-inside mb-4">
@@ -83,15 +83,15 @@ export default function Home() {
                     ))}
                   </ul>
                   <p className="mb-4 flex items-center">
-                    <DollarSign className="mr-2"/> <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
+                    <DollarSign className="mr-2 text-green-500"/> <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
                   </p>
-                  <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsUp className="mr-2"/>Pros:</h3>
+                  <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsUp className="mr-2 text-green-500"/>Pros:</h3>
                   <ul className="list-disc list-inside mb-4">
                     {car.pros.map((pro, i) => (
                       <li key={i}>{pro}</li>
                     ))}
                   </ul>
-                  <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsDown className="mr-2"/>Cons:</h3>
+                  <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsDown className="mr-2 text-red-500"/>Cons:</h3>
                   <ul className="list-disc list-inside">
                     {car.cons.map((con, i) => (
                       <li key={i}>{con}</li>
