@@ -7,6 +7,14 @@ import {Input} from '@/components/ui/input';
 import {GenerateCarSuggestionsOutput, generateCarSuggestions} from '@/ai/flows/generate-car-suggestions';
 import {useToast} from "@/hooks/use-toast"
 
+function EmptySearch() {
+  return (
+    <div className="text-center text-muted-foreground">
+      <p className="text-lg">Enter keywords to search for car suggestions.</p>
+    </div>
+  );
+}
+
 export default function Home() {
   const [keywords, setKeywords] = useState('');
   const [carSuggestions, setCarSuggestions] = useState<GenerateCarSuggestionsOutput | null>(null);
@@ -48,6 +56,8 @@ export default function Home() {
         </Button>
       </div>
 
+      {!carSuggestions && !isLoading && <EmptySearch />}
+
       {carSuggestions && carSuggestions.cars.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4 border border-accent rounded-md p-4">
           {carSuggestions.cars.map((car, index) => (
@@ -81,4 +91,5 @@ export default function Home() {
     </div>
   );
 }
+
 
