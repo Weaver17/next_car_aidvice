@@ -69,6 +69,15 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2">Trims:</h3>
+                <ul className="list-disc list-inside mb-4">
+                  {car.trims.map((trim, i) => (
+                    <li key={i}>{trim}</li>
+                  ))}
+                </ul>
+                <p className="mb-4">
+                  <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
+                </p>
                 <h3 className="text-lg font-semibold mb-2">Pros:</h3>
                 <ul className="list-disc list-inside mb-4">
                   {car.pros.map((pro, i) => (
@@ -91,5 +100,4 @@ export default function Home() {
     </div>
   );
 }
-
 

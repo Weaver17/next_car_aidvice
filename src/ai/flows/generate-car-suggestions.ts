@@ -1,4 +1,3 @@
-// src/ai/flows/generate-car-suggestions.ts
 'use server';
 
 /**
@@ -24,6 +23,8 @@ const GenerateCarSuggestionsOutputSchema = z.object({
   cars: z.array(z.object({
     make: z.string().describe('The make of the car.'),
     model: z.string().describe('The model of the car.'),
+    trims: z.array(z.string()).describe('Available trims for the car model.'),
+    averagePrice: z.number().describe('The average price of the car model.'),
     pros: z.array(z.string()).describe('An array of strings representing the pros of the car model.'),
     cons: z.array(z.string()).describe('An array of strings representing the cons of the car model.'),
   })).describe('An array of car makes and models that match the user-provided criteria.'),
@@ -48,6 +49,8 @@ const prompt = ai.definePrompt({
       cars: z.array(z.object({
         make: z.string().describe('The make of the car.'),
         model: z.string().describe('The model of the car.'),
+        trims: z.array(z.string()).describe('Available trims for the car model.'),
+        averagePrice: z.number().describe('The average price of the car model.'),
         pros: z.array(z.string()).describe('An array of strings representing the pros of the car model.'),
         cons: z.array(z.string()).describe('An array of strings representing the cons of the car model.'),
       })).describe('An array of car makes and models that match the user-provided criteria.'),
@@ -56,7 +59,7 @@ const prompt = ai.definePrompt({
   prompt: `You are an AI assistant that helps users find the right car for them.
 
   Based on the user's keywords, suggest car makes and models that match their criteria.
-  Also, include the common pros and cons of each vehicle.
+  Also, include the available trims and average price of each vehicle, as well as common pros and cons.
 
   User Keywords: {{{keywords}}}
   `,
@@ -77,6 +80,8 @@ const generateCarSuggestionsFlow = ai.defineFlow<
   const cars = carDetails.map(car => ({
     make: car.make,
     model: car.model,
+    trims: car.trims,
+    averagePrice: car.averagePrice,
     pros: car.pros,
     cons: car.cons,
   }));
@@ -85,3 +90,4 @@ const generateCarSuggestionsFlow = ai.defineFlow<
     cars: cars,
   };
 });
+

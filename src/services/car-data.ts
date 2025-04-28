@@ -10,6 +10,14 @@ export interface CarDetails {
    * The model of the car (e.g., Camry, Civic).
    */
   model: string;
+    /**
+   * An array of strings representing the available trims for the car model.
+   */
+  trims: string[];
+  /**
+   * The average price of the car model.
+   */
+  averagePrice: number;
   /**
    * An array of strings representing the pros of the car model.
    */
@@ -33,14 +41,19 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
     {
       make: 'Toyota',
       model: 'RAV4',
+      trims: ['LE', 'XLE', 'Limited'],
+      averagePrice: 28000,
       pros: ['Reliable', 'Good resale value'],
       cons: ['Basic features', 'Not very sporty'],
     },
     {
       make: 'Tesla',
       model: 'Model 3',
+      trims: ['Standard Range Plus', 'Long Range', 'Performance'],
+      averagePrice: 45000,
       pros: ['Electric', 'Advanced technology'],
       cons: ['Expensive', 'Charging infrastructure'],
     },
   ];
 }
+
