@@ -72,10 +72,10 @@ export default function Home() {
                 <CardHeader>
                   <CardTitle className="text-2xl font-semibold tracking-tight">{car.make} {car.model}</CardTitle>
                   <CardDescription className="text-muted-foreground">
-                    AI Suggested Car
+                   {car.size ? `${car.size} ` : ''}{car.type}
                   </CardDescription>
                   <CardDescription className="text-muted-foreground">
-                   {car.size ? `${car.size} ` : ''}{car.type}
+                    AI Suggested Car
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
