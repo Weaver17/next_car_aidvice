@@ -83,7 +83,7 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       averagePrice: 35000,
       pros: ['Powerful', 'High towing capacity', 'Versatile', 'Wide range of configurations', 'Available with advanced tech'],
       cons: ['Poor fuel economy', 'Can be expensive', 'Large size', 'Base models lack features'],
-      hybridOrElectric: 'Hybrid',
+      hybridOrElectric: 'Hybrid Electric None',
       type: 'Truck',
       size: 'full-size',
     },
