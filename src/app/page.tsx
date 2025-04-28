@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {Label} from "@/components/ui/label";
+import {Slider} from "@/components/ui/slider";
 
 function EmptySearch() {
   return (
@@ -37,6 +38,7 @@ export default function Home() {
   const [carSize, setCarSize] = useState<string | undefined>(undefined);
   const [hybridElectric, setHybridElectric] = useState<string | undefined>(undefined);
   const [keywords, setKeywords] = useState('');
+  const [budget, setBudget] = useState<number[]>([100000]);
   const [carSuggestions, setCarSuggestions] = useState<GenerateCarSuggestionsOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const {toast} = useToast()
@@ -54,7 +56,7 @@ export default function Home() {
   const handleSearch = async () => {
     setIsLoading(true);
     try {
-      const suggestions = await generateCarSuggestions({keywords});
+      const suggestions = await generateCarSuggestions({keywords, budget: budget[0]});
       setCarSuggestions(suggestions);
     } catch (error: any) {
       console.error('Error fetching car suggestions:', error);
@@ -111,6 +113,26 @@ export default function Home() {
             ))}
           </SelectContent>
         </Select>
+
+        <Label htmlFor="keywords">Additional Keywords</Label>
+        <Input
+          type="text"
+          id="keywords"
+          placeholder="Enter keywords (e.g., fuel efficient, sporty)"
+          value={keywords}
+          onChange={(e) => setKeywords(e.target.value)}
+          className="focus-visible:border-primary"
+        />
+
+        <Label htmlFor="budget">Budget (Up to ${budget[0].toLocaleString()})</Label>
+        <Slider
+          id="budget"
+          defaultValue={budget}
+          max={100000}
+          step={1000}
+          aria-label="Set budget"
+          onValueChange={setBudget}
+        />
 
         <Button onClick={handleSearch} disabled={isLoading} className="w-full">
           {isLoading ? 'Searching...' : 'Show Recommendations'}
@@ -177,4 +199,3 @@ export default function Home() {
     </div>
   );
 }
-
