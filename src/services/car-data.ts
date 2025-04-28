@@ -47,8 +47,8 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       model: 'RAV4',
       trims: ['LE', 'XLE', 'Limited'],
       averagePrice: 28000,
-      pros: ['Reliable', 'Good resale value'],
-      cons: ['Basic features', 'Not very sporty'],
+      pros: ['Reliable', 'Good resale value', 'Spacious interior'],
+      cons: ['Basic features', 'Not very sporty', 'Mediocre fuel economy'],
       hybridOrElectric: 'Hybrid',
     },
     {
@@ -56,8 +56,8 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       model: 'Model 3',
       trims: ['Standard Range Plus', 'Long Range', 'Performance'],
       averagePrice: 45000,
-      pros: ['Electric', 'Advanced technology'],
-      cons: ['Expensive', 'Charging infrastructure'],
+      pros: ['Electric', 'Advanced technology', 'Quick acceleration', 'Sleek design'],
+      cons: ['Expensive', 'Charging infrastructure', 'Limited service centers'],
       hybridOrElectric: 'Electric',
     },
         {
@@ -65,11 +65,12 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       model: 'Civic',
       trims: ['LX', 'Sport', 'EX'],
       averagePrice: 23000,
-      pros: ['Fuel efficient', 'Fun to drive'],
-      cons: ['Small back seat', 'Road noise'],
+      pros: ['Fuel efficient', 'Fun to drive', 'Affordable', 'Reliable'],
+      cons: ['Small back seat', 'Road noise', 'Basic interior'],
       hybridOrElectric: 'None',
     },
   ];
 }
+
 
 
