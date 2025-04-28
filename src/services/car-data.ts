@@ -161,10 +161,15 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
   // Filter car details based on keywords
   const filteredCars = allCars.filter(car => {
     // Check if any keyword matches the car's type, make, model, price category, or size
-    return lowerCaseKeywords.some(keyword => {
+    const matchesKeywords = lowerCaseKeywords.some(keyword => {
       const carValues = [car.type, car.make, car.model, getPriceCategory(car.averagePrice), car.size || ''].map(value => value.toLowerCase());
       return carValues.some(carValue => carValue.includes(keyword));
     });
+
+    const isElectricOrHybrid = lowerCaseKeywords.includes('electric') ? car.hybridOrElectric.includes('Electric') : lowerCaseKeywords.includes('hybrid') ? car.hybridOrElectric.includes('Hybrid') : true;
+
+
+    return matchesKeywords && isElectricOrHybrid;
   });
 
   return filteredCars;
