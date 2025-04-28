@@ -8,7 +8,8 @@ import {GenerateCarSuggestionsOutput, generateCarSuggestions} from '@/ai/flows/g
 import {useToast} from "@/hooks/use-toast"
 import {ThumbsUp, ThumbsDown} from "lucide-react";
 import Link from 'next/link';
-import {DollarSign, Zap} from "lucide-react";
+import {DollarSign} from "lucide-react";
+import {BatteryCharging, Fuel, Leaf} from "lucide-react";
 
 function EmptySearch() {
   return (
@@ -52,7 +53,7 @@ export default function Home() {
           placeholder="Enter keywords (e.g., SUV, EV, hatchback)"
           value={keywords}
           onChange={(e) => setKeywords(e.target.value)}
-          className="flex-grow"
+          className="flex-grow focus-visible:border-primary"
         />
         <Button onClick={handleSearch} disabled={isLoading}>
           {isLoading ? 'Searching...' : 'Search'}
@@ -73,8 +74,19 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
+                  <div className="flex items-center space-x-2 mb-4">
+                    {car.hybridOrElectric.includes('Hybrid') && (
+                      <Leaf className="text-green-500"/>
+                    )}
+                    {car.hybridOrElectric.includes('Electric') && (
+                      <BatteryCharging className="text-blue-500"/>
+                    )}
+                    {car.hybridOrElectric.includes('None') && (
+                      <Fuel className="text-gray-500"/>
+                    )}
+                  </div>
                    <p className="mb-4 flex items-center">
-                    <Zap className="mr-2 text-yellow-500"/> <span className="font-semibold">Hybrid/Electric:</span> {car.hybridOrElectric}
+                    <DollarSign className="mr-2 text-green-500"/> <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
                   </p>
                   <h3 className="text-lg font-semibold mb-2">Trims:</h3>
                   <ul className="list-disc list-inside mb-4">
@@ -82,18 +94,15 @@ export default function Home() {
                       <li key={i}>{trim}</li>
                     ))}
                   </ul>
-                  <p className="mb-4 flex items-center">
-                    <DollarSign className="mr-2 text-green-500"/> <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
-                  </p>
                   <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsUp className="mr-2 text-green-500"/>Pros:</h3>
                   <ul className="list-disc list-inside mb-4">
-                    {car.pros.map((pro, i) => (
+                    {car.pros.slice(0, 3).map((pro, i) => (
                       <li key={i}>{pro}</li>
                     ))}
                   </ul>
                   <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsDown className="mr-2 text-red-500"/>Cons:</h3>
                   <ul className="list-disc list-inside">
-                    {car.cons.map((con, i) => (
+                    {car.cons.slice(0, 3).map((con, i) => (
                       <li key={i}>{con}</li>
                     ))}
                   </ul>
@@ -108,5 +117,3 @@ export default function Home() {
     </div>
   );
 }
-
-
