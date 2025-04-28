@@ -73,7 +73,7 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       pros: ['Reliable', 'Good resale value', 'Spacious interior', 'Great fuel economy'],
       cons: ['Basic features', 'Not very sporty', 'Mediocre fuel economy', 'Less cargo space than competitors'],
       hybridOrElectric: 'Hybrid Electric None',
-      type: 'Crossover',
+      type: 'SUV',
       size: 'compact',
     },
     {
@@ -1065,6 +1065,28 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
         hybridOrElectric: 'None',
         type: 'SUV',
         size: 'compact',
+      },
+      {
+        make: 'Rivian',
+        model: 'R1T',
+        trims: ['Explore', 'Adventure', 'Launch Edition'],
+        averagePrice: 73000,
+        pros: ['Electric', 'Off-road capability', 'Unique design', 'Spacious interior'],
+        cons: ['Expensive', 'Limited charging infrastructure', 'New brand reliability'],
+        hybridOrElectric: 'Electric',
+        type: 'Truck',
+        size: 'full-size',
+      },
+      {
+        make: 'Rivian',
+        model: 'R1S',
+        trims: ['Explore', 'Adventure', 'Launch Edition'],
+        averagePrice: 78000,
+        pros: ['Electric', 'Off-road capability', 'Unique design', 'Spacious interior'],
+        cons: ['Expensive', 'Limited charging infrastructure', 'New brand reliability'],
+        hybridOrElectric: 'Electric',
+        type: 'SUV',
+        size: 'full-size',
       },
   ];
 
