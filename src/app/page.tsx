@@ -7,7 +7,6 @@ import {Input} from '@/components/ui/input';
 import {GenerateCarSuggestionsOutput, generateCarSuggestions} from '@/ai/flows/generate-car-suggestions';
 import {useToast} from "@/hooks/use-toast"
 import {ThumbsUp, ThumbsDown} from "lucide-react";
-import Link from 'next/link';
 import {DollarSign} from "lucide-react";
 import {BatteryCharging, Fuel, Leaf} from "lucide-react";
 import {ModeToggle} from "@/components/ui/mode-toggle"
@@ -144,7 +143,6 @@ export default function Home() {
       {carSuggestions && carSuggestions.cars.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4 border border-accent rounded-md p-4">
           {carSuggestions.cars.map((car, index) => (
-             <Link href={`/cars/${car.make}-${car.model}`} key={index} className="no-underline">
               <Card key={index} className="bg-card text-card-foreground shadow-md rounded-lg border border-primary">
                 <CardHeader>
                   <CardTitle className="text-2xl font-semibold tracking-tight">{car.make} {car.model}</CardTitle>
@@ -190,7 +188,6 @@ export default function Home() {
                   </ul>
                 </CardContent>
               </Card>
-            </Link>
           ))}
         </div>
       ) : carSuggestions && carSuggestions.cars.length === 0 ? (
@@ -199,3 +196,4 @@ export default function Home() {
     </div>
   );
 }
+
