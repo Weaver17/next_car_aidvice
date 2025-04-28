@@ -37,6 +37,23 @@ export interface CarDetails {
 }
 
 /**
+ * Categorizes cars based on their average price.
+ * @param averagePrice The average price of the car.
+ * @returns A string representing the price category of the car.
+ */
+function getPriceCategory(averagePrice: number): string {
+  if (averagePrice < 25000) {
+    return 'cheap';
+  } else if (averagePrice >= 25000 && averagePrice < 45000) {
+    return 'average';
+  } else if (averagePrice >= 45000 && averagePrice < 100000) {
+    return 'expensive';
+  } else {
+    return 'extremely expensive';
+  }
+}
+
+/**
  * Asynchronously retrieves car details based on user-provided keywords.
  *
  * @param keywords An array of keywords provided by the user (e.g., SUV, EV, hatchback).
@@ -111,9 +128,9 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
 
   // Filter car details based on keywords
   const filteredCars = allCars.filter(car => {
-    // Check if any keyword matches the car's type, make, or model
+    // Check if any keyword matches the car's type, make, model, or price category
     return lowerCaseKeywords.some(keyword => {
-      const carValues = [car.type, car.make, car.model].map(value => value.toLowerCase());
+      const carValues = [car.type, car.make, car.model, getPriceCategory(car.averagePrice)].map(value => value.toLowerCase());
       return carValues.some(carValue => carValue.includes(keyword));
     });
   });
