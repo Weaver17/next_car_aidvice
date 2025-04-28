@@ -6,6 +6,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/compo
 import {Input} from '@/components/ui/input';
 import {GenerateCarSuggestionsOutput, generateCarSuggestions} from '@/ai/flows/generate-car-suggestions';
 import {useToast} from "@/hooks/use-toast"
+import {ThumbsUp, ThumbsDown} from "lucide-react";
 
 function EmptySearch() {
   return (
@@ -81,13 +82,13 @@ export default function Home() {
                 <p className="mb-4">
                   <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
                 </p>
-                <h3 className="text-lg font-semibold mb-2">Pros:</h3>
+                <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsUp className="mr-2"/>Pros:</h3>
                 <ul className="list-disc list-inside mb-4">
                   {car.pros.map((pro, i) => (
                     <li key={i}>{pro}</li>
                   ))}
                 </ul>
-                <h3 className="text-lg font-semibold mb-2">Cons:</h3>
+                <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsDown className="mr-2"/>Cons:</h3>
                 <ul className="list-disc list-inside">
                   {car.cons.map((con, i) => (
                     <li key={i}>{con}</li>
@@ -103,4 +104,5 @@ export default function Home() {
     </div>
   );
 }
+
 
