@@ -1,4 +1,3 @@
-
 'use client';
 
 import {useState} from 'react';
@@ -6,20 +5,26 @@ import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
 import {GenerateCarSuggestionsOutput, generateCarSuggestions} from '@/ai/flows/generate-car-suggestions';
+import {useToast} from "@/hooks/use-toast"
 
 export default function Home() {
   const [keywords, setKeywords] = useState('');
   const [carSuggestions, setCarSuggestions] = useState<GenerateCarSuggestionsOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+    const {toast} = useToast()
 
   const handleSearch = async () => {
     setIsLoading(true);
     try {
       const suggestions = await generateCarSuggestions({keywords});
       setCarSuggestions(suggestions);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching car suggestions:', error);
-      // Display an error message to the user using a toast or alert
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      })
     } finally {
       setIsLoading(false);
     }
