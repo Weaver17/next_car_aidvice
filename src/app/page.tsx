@@ -1,6 +1,6 @@
 'use client';
 
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
@@ -11,20 +11,45 @@ import Link from 'next/link';
 import {DollarSign} from "lucide-react";
 import {BatteryCharging, Fuel, Leaf} from "lucide-react";
 import {ModeToggle} from "@/components/ui/mode-toggle"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {Label} from "@/components/ui/label";
 
 function EmptySearch() {
   return (
     <div className="text-center text-muted-foreground">
-      <p className="text-lg">Enter keywords to search for car suggestions.</p>
+      <p className="text-lg">Answer the questions to see car recommendations.</p>
     </div>
   );
 }
 
+const carTypes = ['SUV', 'Truck', 'Sedan', 'Sports Car', 'Minivan'];
+const carSizes = ['Compact', 'Mid-Size', 'Full-Size', 'Subcompact'];
+const hybridElectricOptions = ['Hybrid', 'Electric', 'Gas'];
+
 export default function Home() {
+  const [carType, setCarType] = useState<string | undefined>(undefined);
+  const [carSize, setCarSize] = useState<string | undefined>(undefined);
+  const [hybridElectric, setHybridElectric] = useState<string | undefined>(undefined);
   const [keywords, setKeywords] = useState('');
   const [carSuggestions, setCarSuggestions] = useState<GenerateCarSuggestionsOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-    const {toast} = useToast()
+  const {toast} = useToast()
+
+  useEffect(() => {
+    // Update keywords when selections change
+    const generateKeywords = () => {
+      const selections = [carType, carSize, hybridElectric].filter(Boolean).join(' ');
+      setKeywords(selections);
+    };
+
+    generateKeywords();
+  }, [carType, carSize, hybridElectric]);
 
   const handleSearch = async () => {
     setIsLoading(true);
@@ -49,16 +74,46 @@ export default function Home() {
       <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 text-foreground">
         Next Car Assister
       </h1>
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-6 w-full max-w-xl px-4">
-        <Input
-          type="text"
-          placeholder="Enter keywords (e.g., SUV, EV, hatchback)"
-          value={keywords}
-          onChange={(e) => setKeywords(e.target.value)}
-          className="flex-grow focus-visible:border-primary"
-        />
-        <Button onClick={handleSearch} disabled={isLoading}>
-          {isLoading ? 'Search' : 'Search'}
+
+      <div className="flex flex-col items-start gap-4 mb-6 w-full max-w-xl px-4">
+        <Label htmlFor="car-type">What type of car are you looking for?</Label>
+        <Select onValueChange={setCarType} defaultValue={carType}>
+          <SelectTrigger id="car-type" className="w-full focus-visible:border-primary">
+            <SelectValue placeholder="Select a car type" />
+          </SelectTrigger>
+          <SelectContent>
+            {carTypes.map((type) => (
+              <SelectItem key={type} value={type}>{type}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Label htmlFor="car-size">What size of car are you looking for?</Label>
+        <Select onValueChange={setCarSize} defaultValue={carSize}>
+          <SelectTrigger id="car-size" className="w-full focus-visible:border-primary">
+            <SelectValue placeholder="Select a car size" />
+          </SelectTrigger>
+          <SelectContent>
+            {carSizes.map((size) => (
+              <SelectItem key={size} value={size}>{size}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Label htmlFor="hybrid-electric">Hybrid, Electric, or Gas?</Label>
+        <Select onValueChange={setHybridElectric} defaultValue={hybridElectric}>
+          <SelectTrigger id="hybrid-electric" className="w-full focus-visible:border-primary">
+            <SelectValue placeholder="Select an option" />
+          </SelectTrigger>
+          <SelectContent>
+            {hybridElectricOptions.map((option) => (
+              <SelectItem key={option} value={option}>{option}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Button onClick={handleSearch} disabled={isLoading} className="w-full">
+          {isLoading ? 'Searching...' : 'Show Recommendations'}
         </Button>
       </div>
 
@@ -76,9 +131,6 @@ export default function Home() {
                   </CardDescription>
                   <CardDescription className="text-muted-foreground">
                     AI Suggested Car
-                  </CardDescription>
-                  <CardDescription className="text-muted-foreground">
-                   {car.size ? `${car.size} ` : ''}{car.type}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
@@ -125,4 +177,3 @@ export default function Home() {
     </div>
   );
 }
-
