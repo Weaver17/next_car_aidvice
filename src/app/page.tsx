@@ -58,7 +58,7 @@ export default function Home() {
           className="flex-grow focus-visible:border-primary"
         />
         <Button onClick={handleSearch} disabled={isLoading}>
-          {isLoading ? 'Search' : 'Searching...'}
+          {isLoading ? 'Searching...' : 'Search'}
         </Button>
       </div>
 
