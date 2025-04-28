@@ -1088,6 +1088,17 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
         type: 'SUV',
         size: 'full-size',
       },
+       {
+        make: 'Lucid Motors',
+        model: 'Air',
+        trims: ['Pure', 'Touring', 'Grand Touring', 'Sapphire'],
+        averagePrice: 107400,
+        pros: ['Electric', 'Luxurious interior', 'Long range', 'Quick acceleration', 'Advanced technology'],
+        cons: ['Very expensive', 'Limited service centers', 'Charging infrastructure', 'New brand reliability'],
+        hybridOrElectric: 'Electric',
+        type: 'Sedan',
+        size: 'full-size',
+      }
   ];
 
   // Convert keywords to lowercase for case-insensitive matching
@@ -1109,3 +1120,4 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
 
   return filteredCars;
 }
+
