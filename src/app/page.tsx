@@ -28,9 +28,9 @@ function EmptySearch() {
   );
 }
 
-const carTypes = ['SUV', 'Truck', 'Sedan', 'Sports Car', 'Minivan'];
-const carSizes = ['Compact', 'Mid-Size', 'Full-Size', 'Subcompact'];
-const hybridElectricOptions = ['Hybrid', 'Electric', 'Gas'];
+const carTypes = ['Any', 'SUV', 'Truck', 'Sedan', 'Sports Car', 'Minivan'];
+const carSizes = ['Any', 'Compact', 'Mid-Size', 'Full-Size', 'Subcompact'];
+const hybridElectricOptions = ['Any', 'Hybrid', 'Electric', 'Gas'];
 
 export default function Home() {
   const [carType, setCarType] = useState<string | undefined>(undefined);
@@ -44,7 +44,7 @@ export default function Home() {
   useEffect(() => {
     // Update keywords when selections change
     const generateKeywords = () => {
-      const selections = [carType, carSize, hybridElectric].filter(Boolean).join(' ');
+      const selections = [carType === 'Any' ? undefined : carType, carSize === 'Any' ? undefined : carSize, hybridElectric === 'Any' ? undefined : hybridElectric].filter(Boolean).join(' ');
       setKeywords(selections);
     };
 
@@ -177,3 +177,4 @@ export default function Home() {
     </div>
   );
 }
+
