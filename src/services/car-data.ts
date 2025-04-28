@@ -26,6 +26,10 @@ export interface CarDetails {
    * An array of strings representing the cons of the car model.
    */
   cons: string[];
+   /**
+   * A string representing if the model has hybrid or electric versions.
+   */
+  hybridOrElectric: string;
 }
 
 /**
@@ -45,6 +49,7 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       averagePrice: 28000,
       pros: ['Reliable', 'Good resale value'],
       cons: ['Basic features', 'Not very sporty'],
+      hybridOrElectric: 'Hybrid',
     },
     {
       make: 'Tesla',
@@ -53,7 +58,18 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       averagePrice: 45000,
       pros: ['Electric', 'Advanced technology'],
       cons: ['Expensive', 'Charging infrastructure'],
+      hybridOrElectric: 'Electric',
+    },
+        {
+      make: 'Honda',
+      model: 'Civic',
+      trims: ['LX', 'Sport', 'EX'],
+      averagePrice: 23000,
+      pros: ['Fuel efficient', 'Fun to drive'],
+      cons: ['Small back seat', 'Road noise'],
+      hybridOrElectric: 'None',
     },
   ];
 }
+
 

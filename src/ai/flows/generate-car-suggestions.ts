@@ -27,6 +27,7 @@ const GenerateCarSuggestionsOutputSchema = z.object({
     averagePrice: z.number().describe('The average price of the car model.'),
     pros: z.array(z.string()).describe('An array of strings representing the pros of the car model.'),
     cons: z.array(z.string()).describe('An array of strings representing the cons of the car model.'),
+    hybridOrElectric: z.string().describe('If the model has hybrid or electric versions. Should be "Hybrid", "Electric", or "None".')
   })).describe('An array of car makes and models that match the user-provided criteria.'),
 });
 export type GenerateCarSuggestionsOutput = z.infer<typeof GenerateCarSuggestionsOutputSchema>;
@@ -53,6 +54,7 @@ const prompt = ai.definePrompt({
         averagePrice: z.number().describe('The average price of the car model.'),
         pros: z.array(z.string()).describe('An array of strings representing the pros of the car model.'),
         cons: z.array(z.string()).describe('An array of strings representing the cons of the car model.'),
+        hybridOrElectric: z.string().describe('If the model has hybrid or electric versions. Should be "Hybrid", "Electric", or "None".')
       })).describe('An array of car makes and models that match the user-provided criteria.'),
     }),
   },
@@ -60,6 +62,7 @@ const prompt = ai.definePrompt({
 
   Based on the user's keywords, suggest car makes and models that match their criteria.
   Also, include the available trims and average price of each vehicle, as well as common pros and cons.
+  Indicate if the model has hybrid or electric versions (Hybrid, Electric, or None).
 
   User Keywords: {{{keywords}}}
   `,
@@ -84,10 +87,12 @@ const generateCarSuggestionsFlow = ai.defineFlow<
     averagePrice: car.averagePrice,
     pros: car.pros,
     cons: car.cons,
+    hybridOrElectric: car.hybridOrElectric,
   }));
 
   return {
     cars: cars,
   };
 });
+
 

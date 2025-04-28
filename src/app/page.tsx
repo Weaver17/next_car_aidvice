@@ -69,6 +69,9 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-6">
+                 <p className="mb-4">
+                  <span className="font-semibold">Hybrid/Electric:</span> {car.hybridOrElectric}
+                </p>
                 <h3 className="text-lg font-semibold mb-2">Trims:</h3>
                 <ul className="list-disc list-inside mb-4">
                   {car.trims.map((trim, i) => (
@@ -100,4 +103,5 @@ export default function Home() {
     </div>
   );
 }
+
 
