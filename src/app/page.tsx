@@ -62,7 +62,7 @@ export default function Home() {
       {!carSuggestions && !isLoading && <EmptySearch />}
 
       {carSuggestions && carSuggestions.cars.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4 border border-primary rounded-md p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4 border border-accent rounded-md p-4">
           {carSuggestions.cars.map((car, index) => (
              <Link href={`/cars/${car.make}-${car.model}`} key={index} className="no-underline">
               <Card key={index} className="bg-card text-card-foreground shadow-md rounded-lg border border-primary">
