@@ -34,6 +34,10 @@ export interface CarDetails {
     * The type of car, such as SUV, Truck, Sedan, etc.
     */
    type: string;
+   /**
+    * The size of the car, such as compact, mid-size, or full-size.
+    */
+   size?: string;
 }
 
 /**
@@ -69,7 +73,8 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       pros: ['Reliable', 'Good resale value', 'Spacious interior', 'Great fuel economy'],
       cons: ['Basic features', 'Not very sporty', 'Mediocre fuel economy', 'Less cargo space than competitors'],
       hybridOrElectric: 'Hybrid',
-      type: 'SUV',
+      type: 'Crossover',
+      size: 'compact',
     },
     {
       make: 'Ford',
@@ -80,6 +85,7 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       cons: ['Poor fuel economy', 'Can be expensive', 'Large size', 'Base models lack features'],
       hybridOrElectric: 'Hybrid',
       type: 'Truck',
+      size: 'full-size',
     },
     {
       make: 'Tesla',
@@ -90,6 +96,7 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       cons: ['Expensive', 'Charging infrastructure', 'Limited service centers', 'Range anxiety'],
       hybridOrElectric: 'Electric',
       type: 'Sedan',
+      size: 'compact',
     },
     {
       make: 'Honda',
@@ -100,6 +107,7 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       cons: ['Small back seat', 'Road noise', 'Basic interior', 'Less cargo space'],
       hybridOrElectric: 'None',
       type: 'Sedan',
+      size: 'compact',
     },
     {
       make: 'Chevrolet',
@@ -110,6 +118,7 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       cons: ['Expensive', 'Poor fuel economy', 'Hard to park', 'Bulky size'],
       hybridOrElectric: 'None',
       type: 'SUV',
+      size: 'full-size',
     },
     {
       make: 'GMC',
@@ -120,6 +129,29 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       cons: ['Can be pricey', 'Lower fuel economy', 'Styling is subjective', 'Ride can be stiff'],
       hybridOrElectric: 'None',
       type: 'Truck',
+      size: 'full-size',
+    },
+    {
+      make: 'Chrysler',
+      model: 'Pacifica',
+      trims: ['Touring', 'Touring L', 'Limited'],
+      averagePrice: 38000,
+      pros: ['Spacious interior', 'Comfortable seating', 'Available hybrid option', 'Lots of storage', 'Smooth ride'],
+      cons: ['Can be expensive', 'Styling is not for everyone', 'Some reliability concerns', 'Not very sporty'],
+      hybridOrElectric: 'Hybrid',
+      type: 'Minivan',
+      size: 'full-size',
+    },
+    {
+      make: 'Mazda',
+      model: 'MX-5 Miata',
+      trims: ['Sport', 'Club', 'Grand Touring'],
+      averagePrice: 30000,
+      pros: ['Fun to drive', 'Agile handling', 'Convertible', 'Affordable sports car', 'Stylish'],
+      cons: ['Small interior', 'Limited cargo space', 'Not practical for families', 'Can be noisy'],
+      hybridOrElectric: 'None',
+      type: 'Sports Car',
+      size: 'compact',
     },
   ];
 
@@ -128,9 +160,9 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
 
   // Filter car details based on keywords
   const filteredCars = allCars.filter(car => {
-    // Check if any keyword matches the car's type, make, model, or price category
+    // Check if any keyword matches the car's type, make, model, price category, or size
     return lowerCaseKeywords.some(keyword => {
-      const carValues = [car.type, car.make, car.model, getPriceCategory(car.averagePrice)].map(value => value.toLowerCase());
+      const carValues = [car.type, car.make, car.model, getPriceCategory(car.averagePrice), car.size || ''].map(value => value.toLowerCase());
       return carValues.some(carValue => carValue.includes(keyword));
     });
   });
