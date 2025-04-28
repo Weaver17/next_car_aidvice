@@ -75,7 +75,7 @@ export default function Home() {
                     AI Suggested Car
                   </CardDescription>
                   <CardDescription className="text-muted-foreground">
-                   {car.type}
+                   {car.size ? `${car.size} ` : ''}{car.type}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
