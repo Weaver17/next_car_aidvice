@@ -10,6 +10,7 @@ import {ThumbsUp, ThumbsDown} from "lucide-react";
 import Link from 'next/link';
 import {DollarSign} from "lucide-react";
 import {BatteryCharging, Fuel, Leaf} from "lucide-react";
+import {ModeToggle} from "@/components/ui/mode-toggle"
 
 function EmptySearch() {
   return (
@@ -44,6 +45,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen py-10 bg-background">
+        <ModeToggle className="absolute top-4 right-4"/>
       <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 text-foreground">
         Next Car Assister
       </h1>
@@ -56,7 +58,7 @@ export default function Home() {
           className="flex-grow focus-visible:border-primary"
         />
         <Button onClick={handleSearch} disabled={isLoading}>
-          {isLoading ? 'Searching...' : 'Search'}
+          {isLoading ? 'Search' : 'Searching...'}
         </Button>
       </div>
 
