@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-start min-h-screen py-10 bg-background">
       <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 text-foreground">
-        Next Car AI Assister
+        Next Car Assister
       </h1>
       <div className="flex flex-col md:flex-row items-center gap-4 mb-6 w-full max-w-xl px-4">
         <Input
@@ -49,7 +49,7 @@ export default function Home() {
       </div>
 
       {carSuggestions && carSuggestions.cars.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4 border border-accent rounded-md p-4">
           {carSuggestions.cars.map((car, index) => (
             <Card key={index} className="bg-card text-card-foreground shadow-md rounded-lg">
               <CardHeader>
@@ -81,3 +81,4 @@ export default function Home() {
     </div>
   );
 }
+
