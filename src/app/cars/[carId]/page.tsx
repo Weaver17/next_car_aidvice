@@ -64,6 +64,10 @@ export default function CarDetailPage() {
     fetchCarSummary();
   }, [carId, toast]);
 
+  const cleanedCarId = carId?.replace(/%20/g, ' ') || '';
+  const [make, model] = cleanedCarId.split('-');
+    const imageUrl = `https://picsum.photos/400/300?random=${carId}`;
+
   return (
     <div className="flex flex-col items-center justify-start min-h-screen py-10 bg-background">
       <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 text-foreground">
@@ -81,6 +85,7 @@ export default function CarDetailPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="p-6">
+             <img src={imageUrl} alt={`${make} ${model}`} className="mb-4 rounded-md shadow-md"/>
                <Alert>
               <Info className="h-4 w-4"/>
               <AlertTitle>Summary</AlertTitle>
@@ -131,4 +136,5 @@ export default function CarDetailPage() {
     </div>
   );
 }
+
 
