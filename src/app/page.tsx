@@ -58,7 +58,7 @@ export default function Home() {
           className="flex-grow focus-visible:border-primary"
         />
         <Button onClick={handleSearch} disabled={isLoading}>
-          {isLoading ? 'Searching...' : 'Search'}
+          {isLoading ? 'Search' : 'Search'}
         </Button>
       </div>
 
@@ -76,6 +76,9 @@ export default function Home() {
                   </CardDescription>
                   <CardDescription className="text-muted-foreground">
                     AI Suggested Car
+                  </CardDescription>
+                  <CardDescription className="text-muted-foreground">
+                   {car.size ? `${car.size} ` : ''}{car.type}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
@@ -122,3 +125,4 @@ export default function Home() {
     </div>
   );
 }
+
