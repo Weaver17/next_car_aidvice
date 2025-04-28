@@ -8,6 +8,7 @@ import {GenerateCarSuggestionsOutput, generateCarSuggestions} from '@/ai/flows/g
 import {useToast} from "@/hooks/use-toast"
 import {ThumbsUp, ThumbsDown} from "lucide-react";
 import Link from 'next/link';
+import {DollarSign, Zap} from "lucide-react";
 
 function EmptySearch() {
   return (
@@ -72,8 +73,8 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
-                   <p className="mb-4">
-                    <span className="font-semibold">Hybrid/Electric:</span> {car.hybridOrElectric}
+                   <p className="mb-4 flex items-center">
+                    <Zap className="mr-2"/> <span className="font-semibold">Hybrid/Electric:</span> {car.hybridOrElectric}
                   </p>
                   <h3 className="text-lg font-semibold mb-2">Trims:</h3>
                   <ul className="list-disc list-inside mb-4">
@@ -81,8 +82,8 @@ export default function Home() {
                       <li key={i}>{trim}</li>
                     ))}
                   </ul>
-                  <p className="mb-4">
-                    <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
+                  <p className="mb-4 flex items-center">
+                    <DollarSign className="mr-2"/> <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
                   </p>
                   <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsUp className="mr-2"/>Pros:</h3>
                   <ul className="list-disc list-inside mb-4">
