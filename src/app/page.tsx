@@ -73,7 +73,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-start min-h-screen py-10 bg-background">
         <ModeToggle className="absolute top-4 right-4"/>
       <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 text-foreground">
-        Next Car Assister
+        Next Car A.I.dvice
       </h1>
 
       <div className="flex flex-col items-start gap-4 mb-6 w-full max-w-xl px-4">
