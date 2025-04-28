@@ -81,6 +81,13 @@ export default function CarDetailPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="p-6">
+               <Alert>
+              <Info className="h-4 w-4"/>
+              <AlertTitle>Summary</AlertTitle>
+              <AlertDescription>
+                {carSummary.summary}
+              </AlertDescription>
+            </Alert>
           <div className="flex items-center space-x-2 mb-4">
                     {carDetails.hybridOrElectric.includes('Hybrid') && (
                       <Leaf className="text-green-500"/>
@@ -113,13 +120,7 @@ export default function CarDetailPage() {
                         <li key={i}>{con}</li>
                       ))}
                     </ul>
-            <Alert>
-              <Info className="h-4 w-4"/>
-              <AlertTitle>Summary</AlertTitle>
-              <AlertDescription>
-                {carSummary.summary}
-              </AlertDescription>
-            </Alert>
+
           </CardContent>
         </Card>
       ) : (
@@ -130,3 +131,4 @@ export default function CarDetailPage() {
     </div>
   );
 }
+
