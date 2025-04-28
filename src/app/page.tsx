@@ -7,6 +7,7 @@ import {Input} from '@/components/ui/input';
 import {GenerateCarSuggestionsOutput, generateCarSuggestions} from '@/ai/flows/generate-car-suggestions';
 import {useToast} from "@/hooks/use-toast"
 import {ThumbsUp, ThumbsDown} from "lucide-react";
+import Link from 'next/link';
 
 function EmptySearch() {
   return (
@@ -62,40 +63,42 @@ export default function Home() {
       {carSuggestions && carSuggestions.cars.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4 border border-primary rounded-md p-4">
           {carSuggestions.cars.map((car, index) => (
-            <Card key={index} className="bg-card text-card-foreground shadow-md rounded-lg border border-primary">
-              <CardHeader>
-                <CardTitle className="text-2xl font-semibold tracking-tight">{car.make} {car.model}</CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  AI Suggested Car
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-6">
-                 <p className="mb-4">
-                  <span className="font-semibold">Hybrid/Electric:</span> {car.hybridOrElectric}
-                </p>
-                <h3 className="text-lg font-semibold mb-2">Trims:</h3>
-                <ul className="list-disc list-inside mb-4">
-                  {car.trims.map((trim, i) => (
-                    <li key={i}>{trim}</li>
-                  ))}
-                </ul>
-                <p className="mb-4">
-                  <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
-                </p>
-                <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsUp className="mr-2"/>Pros:</h3>
-                <ul className="list-disc list-inside mb-4">
-                  {car.pros.map((pro, i) => (
-                    <li key={i}>{pro}</li>
-                  ))}
-                </ul>
-                <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsDown className="mr-2"/>Cons:</h3>
-                <ul className="list-disc list-inside">
-                  {car.cons.map((con, i) => (
-                    <li key={i}>{con}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+             <Link href={`/cars/${car.make}-${car.model}`} key={index} className="no-underline">
+              <Card key={index} className="bg-card text-card-foreground shadow-md rounded-lg border border-primary">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-semibold tracking-tight">{car.make} {car.model}</CardTitle>
+                  <CardDescription className="text-muted-foreground">
+                    AI Suggested Car
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-6">
+                   <p className="mb-4">
+                    <span className="font-semibold">Hybrid/Electric:</span> {car.hybridOrElectric}
+                  </p>
+                  <h3 className="text-lg font-semibold mb-2">Trims:</h3>
+                  <ul className="list-disc list-inside mb-4">
+                    {car.trims.map((trim, i) => (
+                      <li key={i}>{trim}</li>
+                    ))}
+                  </ul>
+                  <p className="mb-4">
+                    <span className="font-semibold">Average Price:</span> ${car.averagePrice.toLocaleString()}
+                  </p>
+                  <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsUp className="mr-2"/>Pros:</h3>
+                  <ul className="list-disc list-inside mb-4">
+                    {car.pros.map((pro, i) => (
+                      <li key={i}>{pro}</li>
+                    ))}
+                  </ul>
+                  <h3 className="text-lg font-semibold mb-2 flex items-center"><ThumbsDown className="mr-2"/>Cons:</h3>
+                  <ul className="list-disc list-inside">
+                    {car.cons.map((con, i) => (
+                      <li key={i}>{con}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       ) : carSuggestions && carSuggestions.cars.length === 0 ? (
@@ -104,4 +107,5 @@ export default function Home() {
     </div>
   );
 }
+
 
