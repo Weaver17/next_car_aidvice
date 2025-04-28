@@ -30,6 +30,10 @@ export interface CarDetails {
    * A string representing if the model has hybrid or electric versions.
    */
   hybridOrElectric: string;
+   /**
+    * The type of car, such as SUV, Truck, Sedan, etc.
+    */
+   type: string;
 }
 
 /**
@@ -39,9 +43,7 @@ export interface CarDetails {
  * @returns A promise that resolves to an array of CarDetails objects matching the keywords.
  */
 export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
-  // TODO: Implement this by calling an API.
-
-  return [
+  const allCars: CarDetails[] = [
     {
       make: 'Toyota',
       model: 'RAV4',
@@ -50,6 +52,17 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       pros: ['Reliable', 'Good resale value', 'Spacious interior'],
       cons: ['Basic features', 'Not very sporty', 'Mediocre fuel economy'],
       hybridOrElectric: 'Hybrid',
+      type: 'SUV',
+    },
+    {
+      make: 'Ford',
+      model: 'F-150',
+      trims: ['XL', 'XLT', 'Lariat'],
+      averagePrice: 35000,
+      pros: ['Powerful', 'High towing capacity', 'Versatile'],
+      cons: ['Poor fuel economy', 'Can be expensive', 'Large size'],
+      hybridOrElectric: 'Hybrid',
+      type: 'Truck',
     },
     {
       make: 'Tesla',
@@ -59,8 +72,9 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       pros: ['Electric', 'Advanced technology', 'Quick acceleration', 'Sleek design'],
       cons: ['Expensive', 'Charging infrastructure', 'Limited service centers'],
       hybridOrElectric: 'Electric',
+      type: 'Sedan',
     },
-        {
+    {
       make: 'Honda',
       model: 'Civic',
       trims: ['LX', 'Sport', 'EX'],
@@ -68,9 +82,41 @@ export async function getCarDetails(keywords: string[]): Promise<CarDetails[]> {
       pros: ['Fuel efficient', 'Fun to drive', 'Affordable', 'Reliable'],
       cons: ['Small back seat', 'Road noise', 'Basic interior'],
       hybridOrElectric: 'None',
+      type: 'Sedan',
+    },
+    {
+      make: 'Chevrolet',
+      model: 'Suburban',
+      trims: ['LS', 'LT', 'Premier'],
+      averagePrice: 60000,
+      pros: ['Very spacious', 'Powerful engine', 'Comfortable ride'],
+      cons: ['Expensive', 'Poor fuel economy', 'Hard to park'],
+      hybridOrElectric: 'None',
+      type: 'SUV',
+    },
+    {
+      make: 'GMC',
+      model: 'Sierra',
+      trims: ['Base', 'SLE', 'SLT'],
+      averagePrice: 40000,
+      pros: ['Strong engine options', 'Comfortable interior', 'Good towing'],
+      cons: ['Can be pricey', 'Lower fuel economy', 'Styling is subjective'],
+      hybridOrElectric: 'None',
+      type: 'Truck',
     },
   ];
+
+  // Convert keywords to lowercase for case-insensitive matching
+  const lowerCaseKeywords = keywords.map(keyword => keyword.toLowerCase());
+
+  // Filter car details based on keywords
+  const filteredCars = allCars.filter(car => {
+    // Check if any keyword matches the car's type, make, or model
+    return lowerCaseKeywords.some(keyword => {
+      const carValues = [car.type, car.make, car.model].map(value => value.toLowerCase());
+      return carValues.some(carValue => carValue.includes(keyword));
+    });
+  });
+
+  return filteredCars;
 }
-
-
-
