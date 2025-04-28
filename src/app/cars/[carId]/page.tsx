@@ -66,18 +66,6 @@ export default function CarDetailPage() {
                 {carSummary.summary}
               </AlertDescription>
             </Alert>
-            <h3 className="text-lg font-semibold mt-4 mb-2">
-              Features and Options:
-            </h3>
-            <ul className="list-disc list-inside">
-              <li>Adaptive Cruise Control</li>
-              <li>Blind Spot Monitoring</li>
-              <li>Lane Keep Assist</li>
-              <li>Automatic Emergency Braking</li>
-              <li>Apple CarPlay and Android Auto</li>
-              <li>Premium Audio System</li>
-              {/* Add more features and options here */}
-            </ul>
           </CardContent>
         </Card>
       ) : (
@@ -88,3 +76,4 @@ export default function CarDetailPage() {
     </div>
   );
 }
+
