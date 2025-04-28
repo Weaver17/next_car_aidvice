@@ -72,6 +72,9 @@ export default function Home() {
                   <CardDescription className="text-muted-foreground">
                     AI Suggested Car
                   </CardDescription>
+                  <CardDescription className="text-muted-foreground">
+                   {car.type}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-2 mb-4">
@@ -117,3 +120,4 @@ export default function Home() {
     </div>
   );
 }
+
